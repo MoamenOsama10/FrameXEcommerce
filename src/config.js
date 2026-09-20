@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost:5289/api";
+export const API_URL = "https://framex10-api.runasp.net/api";

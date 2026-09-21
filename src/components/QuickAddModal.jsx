@@ -49,7 +49,6 @@ export default function QuickAddModal({ productId, onClose }) {
   const variants = product.variants || [];
   const selectedVariant = variants.find((v) => v.size === selectedSize);
   const currentPrice = selectedVariant ? selectedVariant.price : product.basePrice;
-  const originalPrice = Math.round(currentPrice * 1.15); 
 
   const buildCartItem = () => ({
     id: product.id,
@@ -140,7 +139,6 @@ export default function QuickAddModal({ productId, onClose }) {
             <h2 className="text-2xl font-bold uppercase tracking-wide text-gray-900">{product.name}</h2>
 
             <div className="mt-3 flex items-center gap-3">
-              <span className="text-gray-400 line-through text-lg font-medium">{originalPrice} EGP</span>
               <span className="text-xl font-bold text-red-600">{currentPrice} EGP</span>
             </div>
 

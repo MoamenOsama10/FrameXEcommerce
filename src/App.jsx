@@ -13,6 +13,7 @@ import CartDrawer from "./components/CartDrawer";
 import CategoryPage from "./components/CategoryPage";
 import CheckoutPage from "./components/CheckoutPage";
 import Footer from "./components/Footer";
+import ScrollManager from "./components/ScrollManager";
 
 import AdminRoute from "./components/AdminRoute";
 import AdminLayout from "./components/AdminLayout";
@@ -41,8 +42,11 @@ const isBestSeller = (cat) =>
     (v) => (v || "").toLowerCase().replace(/[\s_-]/g, "") === "bestseller"
   );
 
+// كاش بسيط: لما نرجع للصفحة الرئيسية المنتجات تظهر فوراً وبعدها تتحدّث من الـ API
+let homeCache = null;
+
 function HomePage() {
-  const [categoriesWithProducts, setCategoriesWithProducts] = useState([]);
+  const [categoriesWithProducts, setCategoriesWithProducts] = useState(homeCache || []);
 
   useEffect(() => {
     const loadHomeData = async () => {
@@ -57,7 +61,9 @@ function HomePage() {
         })
       );
 
-      setCategoriesWithProducts(results.filter((c) => c.products.length > 0));
+      const ready = results.filter((c) => c.products.length > 0);
+      homeCache = ready;
+      setCategoriesWithProducts(ready);
     };
 
     loadHomeData();
@@ -108,6 +114,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-base relative">
+      <ScrollManager />
       <AnimatedGridBackground />
 
       {isHome && <AnnouncementBar />}

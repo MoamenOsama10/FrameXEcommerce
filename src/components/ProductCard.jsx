@@ -8,7 +8,7 @@ export default function ProductCard({ id, imageUrl, name, basePrice }) {
   const fullImageUrl = imageUrl ? `${API_URL.replace("/api", "")}${imageUrl}` : null;
 
   return (
-    <div className="flex-shrink-0 w-[220px]">
+    <div className="flex-shrink-0 w-[220px] max-w-full min-w-0">
       <Link to={`/product/${id}`} className="block group">
         <div className="relative rounded-xl overflow-hidden bg-surface aspect-[3/4]">
           {fullImageUrl && (
@@ -22,7 +22,7 @@ export default function ProductCard({ id, imageUrl, name, basePrice }) {
       </Link>
 
       <div className="mt-3">
-        <p className="text-xs font-semibold tracking-wide text-text uppercase">{name}</p>
+        <p className="text-xs font-semibold tracking-wide text-text uppercase truncate">{name}</p>
         <div className="mt-1 flex items-center gap-2">
           <span className="text-sm font-semibold text-red-600">{basePrice} EGP</span>
         </div>
